@@ -1,0 +1,39 @@
+# Build
+build/
+cmake-build-*/
+*.o
+*.obj
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+
+# CUDA compiled
+*.cubin
+*.fatbin
+*.ptx
+*.gpu
+*.i
+*.ii
+
+# Executables
+*.out
+*.exe
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+docker/.env
+
+# Jupyter
+.ipynb_checkpoints/
