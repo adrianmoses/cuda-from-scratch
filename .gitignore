@@ -37,3 +37,6 @@ docker/.env
 
 # Jupyter
 .ipynb_checkpoints/
+
+# Binaries
+vecAdd
