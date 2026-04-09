@@ -1,6 +1,6 @@
 
 
-Goal: Learn basics and start with basic vector addition. Then you'll be read to learn matmul yourself.
+Goal: Learn basics and start with basic vector addition.
 
 
 ### Introduction
@@ -23,6 +23,19 @@ This is different from Task Parallelism: tasks that can be run at the same time 
 ### Kernals and Grids
 
 CUDA C extends C to allow code to run on a GPU (device) in addition to the CPU (host). Device code is executed via functions called kernels. Each kernel launch creates a grid of thread blocks, where each block contains many threads. Kernel launches are asynchronous — the host continues executing and can synchronize explicitly when device results are needed.
+
+
+### Calling a kernel funtion
+
+To define a kernal function use the `__global__` keyword before the function definition.
+
+you have access to block and thread variables to provide access to each thread `threadIdx.x`, `blockIdx.x` and `blockDim.x`
+
+you can reference one individual thread with `i = threadIdx.x + blockIdx.x * blockDim.x` This drills down to the block, row (blockDim) and "cell" (threadIdx)
+
+to call a kernal funciton you use executive configuation parameters to define the block size (number of threads) and number of blocks.
+
+`kernalFn<<blockNum, numThreadsPerBlockl>>()`
 
 
 Sources:

@@ -4,3 +4,4 @@ project(cuda-from-scratch LANGUAGES CXX CUDA)
 set(CMAKE_CUDA_ARCHITECTURES 120)
 
 add_subdirectory(src/00_vector_addition)
+add_subdirectory(src/01_image_blur)

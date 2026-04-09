@@ -40,3 +40,4 @@ docker/.env
 
 # Binaries
 vecAdd
+imageBlur
