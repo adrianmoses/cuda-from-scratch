@@ -23,10 +23,9 @@ void blurKernal(unsigned char *in, unsigned char *out, int w, int h) {
                    ++pixels; // keep track of number of pixels in the average
                }
            }
-
-           // write the new pixel value out
-           out[row*w + col] = (pixVal/pixels);
        }
+       // write the new pixel value out
+       out[row*w + col] = (unsigned char)(pixVal/pixels);
    }
 }
 
@@ -51,11 +50,16 @@ int main() {
 
     unsigned char *in_d, *out_d;
 
+    unsigned long before_checksum;
+    for (int i = 0; i < size; i++)
+        before_checksum += out[i];
+
+
     //Allocate GPU memory
     cudaMalloc((void**) &in_d, size);
     cudaMalloc((void**) &out_d, size);
 
-    cudaMemcpy(in, in_d, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(in_d, in, size, cudaMemcpyHostToDevice);
 
     dim3 gridSize(ceil(w/3.0), ceil(h/3.0), 1);
     dim3 blockSize(3, 3, 1);
@@ -63,8 +67,16 @@ int main() {
 
     cudaMemcpy(out, out_d, size, cudaMemcpyDeviceToHost);
 
+    unsigned long after_checksum;
+    for (int i = 0; i < size; i++)
+        after_checksum += out[i];
+
+    printf("before checksum %lu\n", before_checksum);
+    printf("after checksum %lu\n", after_checksum);
+
     cudaFree(in_d);
     cudaFree(out_d);
+
 
     free(in);
     free(out);
